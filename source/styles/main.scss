@@ -12,8 +12,16 @@ $divider-color:        #BDBDBD;
 
 body{
   margin: 0;
+  color: $primary-color-text;
+  -webkit-font-smoothing: antialised;
 }
 
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
 .app-wrapper {
   // 设置warpper高度为设备可见高度。若不设置则为内容所撑开的高度
   // 若不设置，则在内容不足以撑满可是区域时，会呈现footer上移的情况
@@ -24,11 +32,26 @@ body{
 }
 
 .app-header{
-  //设置头尾不压缩，防止content 内容过多时把头尾压扁
+  display: flex;
+  //设置头尾不压缩，防止content 内容过多时把头尾压扁,该属性设置于 item 中
   flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  color: $primary-color-text;
   background-color: $primary-color-dark;
   height: 80px;
   border-bottom: 2px solid #fff59d;
+  a {
+    flex-basis: 0;
+    // 字体颜色没继承
+    color: $primary-color-text;
+  }
+  .button {
+      background-color: rgba(0,0,0,.1);
+      padding: 10px 15px;
+      border-radius: 4px;
+    }
 }
 
 .app-content {
@@ -47,6 +70,31 @@ body{
 .app-footer {
   height: 80px;
   flex-shrink: 0;
+  // 使 app-footer 转为 flex 容器。a标签会在竖直height属性上，占满容器高度
+  display: flex;
   background-color: $primary-color-dark;
   border-top: 1px solid #e6e6e6;
+  // 使用 following sibling 选择器`~`，能达到下面使用 &:first-child 相似的效果
+  // 在这个案例中，使用直接相邻选择器`+`,也能达到类似的效果
+  a  {
+    padding: 15px;
+    text-align:center;
+    color: rgba(0,0,0,.5);
+    // 忽略内容，平均分配空间
+    // ref: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+    // ref: https://www.w3.org/TR/css-flexbox-1/images/rel-vs-abs-flex.svg
+    flex-basis: 0;
+    flex-grow: 1;
+    border-left: 2px solid rgba(0,0,0,.1);
+    &:first-child {
+      border-left: 0;
+    }
+    i {
+      display: block;
+      font-size: 25px;
+      color: white;
+      text-shadow: 3px 3px 0 rgba(0,0,0,.1);
+      padding-bottom: 10px;
+    }
+  }
 }
