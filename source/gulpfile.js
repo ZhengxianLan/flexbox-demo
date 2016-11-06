@@ -19,7 +19,7 @@ gulp.task('build',function () {
 
 gulp.task('sass',function () {
   gulp.src('styles/main.scss')
-  .pipe(sass()).on('error',handle_error)
+    .pipe(sass()).on('error',sass.logError) // 使用 sass 自带的logError函数
   .pipe(autoprefixer())
   .pipe(gulp.dest('../styles'));
 });
